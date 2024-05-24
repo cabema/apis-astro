@@ -1,0 +1,47 @@
+---
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+const today = new Date();
+
+const api_ini = "https://api.cmfchile.cl/api-sbifv3/recursos_api/tmc/2024/"
+const api_fin = "?apikey=1e57af7f814ca19e30489e2c2b8a821f7773b45e&formato=json"
+const mes = format(today, "MM", { locale: es });
+
+const api = api_ini + mes + api_fin
+const MesNombre = format(today,"MMMM, yyyy", { locale: es });
+
+const response = await fetch(
+api
+);
+
+const data = await response.json();
+//console.log(data);
+---
+
+
+<div class="p-5">
+
+{
+  data.TMCs.map((item) => (
+  <div class="card text-bg-dark mb-3 p-5 shadow rounded" style="max-width: auto;">
+    <div class="card-header">
+      <p class="text-center fs-6">{item.Titulo}</p>
+    </div>
+    <div class="card-body">
+      <div class="row row-cols-3 text-center fs-4">
+        <p class="card-title">Valor$: {item.Valor}</p>
+        <p class="">Fecha: {item.Fecha}</p>
+        <p class="">Tipo: {item.Tipo}</p>
+      </div>
+    </div>
+      <div class="card-footer text-center fs-6">
+        <p class="card-text">{item.SubTitulo}</p>
+      </div>
+  </div>
+
+  ))
+}
+
+</div>
+

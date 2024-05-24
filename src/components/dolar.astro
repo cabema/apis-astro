@@ -1,0 +1,52 @@
+---
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+const today = new Date();
+
+const api_ini = "https://api.sbif.cl/api-sbifv3/recursos_api/dolar/2024/"
+const api_fin = "?apikey=1e57af7f814ca19e30489e2c2b8a821f7773b45e&formato=json"
+const mes = format(today, "MM", { locale: es });
+
+const api = api_ini + mes + api_fin
+const MesNombre = format(today,"MMMM, yyyy", { locale: es });
+
+const response = await fetch(
+api
+);
+
+const data = await response.json();
+//console.log(response);
+---
+
+
+
+<div class="p-5">
+
+    {
+      data.Dolares.map((item) => (
+      
+      <table class="table table-dark table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">VALOR</th>
+                    <th scope="col">FECHA</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{item.Valor}</td>
+                    <td>{item.Fecha}</td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+
+
+
+      ))
+    }
+
+</div>

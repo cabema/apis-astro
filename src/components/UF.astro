@@ -1,0 +1,56 @@
+---
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+const today = new Date();
+
+const api_ini = "https://api.sbif.cl/api-sbifv3/recursos_api/uf/2024/"
+const api_fin = "?apikey=1e57af7f814ca19e30489e2c2b8a821f7773b45e&formato=json"
+const mes = format(today, "MM", { locale: es });
+
+const api = api_ini + mes + api_fin
+const MesNombre = format(today,"MMMM, yyyy", { locale: es });
+
+const response = await fetch(
+api
+);
+
+const data = await response.json();
+//console.log(data);
+---
+
+
+	<div class="container">
+
+            <h1>UF</h1>
+
+            <div>
+                {
+                  data.UFs.map((item) => (
+                  <div>
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                    <th scope="col">VALOR</th>
+                    <th scope="col">FECHA</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{item.Valor}</td>
+                    <td>{item.Fecha}</td>
+                  </tr>
+
+
+                    </tbody>
+                  </table>
+            </div>
+                  ))
+                }
+            </div>
+
+            
+
+	</div>
+

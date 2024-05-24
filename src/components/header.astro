@@ -1,0 +1,24 @@
+---
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+const today = new Date();
+const formattedDate = format(today, "EEEE, dd 'de' MMMM 'de' yyyy", { locale: es });
+const Mes = format(today, "MMMM yyyy", { locale: es });
+---
+
+<!-- src\components\header.astro -->
+
+  
+<nav class="navbar bg-dark border-bottom border-body text-white fixed-top" data-bs-theme="dark">
+<div class="gap-10">
+    
+    <a class="m-3" href="/">HOME</a>
+    <a class="m-3" href="/tmc/">TMC</a>
+    <a class="m-3" href="/dolar/">DOLAR</a>
+    <a class="m-3" href="/uf/">UF</a>
+</div>
+<div>
+    <p class="text-center p-1">{Mes}</p>
+</div>
+</nav>

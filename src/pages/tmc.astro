@@ -1,0 +1,22 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Tmc2 from '@components/tmcApi.astro';
+
+
+
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+const today = new Date();
+const formattedDate = format(today, "dd'-'MM'-'yyyy", { locale: es });
+const mes = format(today, "M", { locale: es });
+---
+
+<Layout>
+	<div class="container">
+
+		<Tmc2 />
+	</div>
+
+	
+</Layout>
